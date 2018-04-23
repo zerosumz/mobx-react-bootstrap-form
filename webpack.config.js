@@ -1,37 +1,29 @@
 const webpack = require('webpack');
 const path = require('path');
 const WebpackStrip = require('strip-loader');
+const MergeIntoSingleFilePlugin = require('webpack-merge-and-include-globally');
 
 module.exports = {
-    plugins: [
+    mode: 'production',
+    optimization: {
+        minimize: false
+    },
 
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false,
-                screw_ie8: true,
-                conditionals: true,
-                unused: true,
-                comparisons: true,
-                sequences: true,
-                dead_code: true,
-                evaluate: true,
-                if_return: true,
-                join_vars: true
-            },
-            output: {
-                comments: false
-            },
-            sourceMap: true
-        }),
-        new webpack.optimize.AggressiveMergingPlugin()
+    plugins: [
+        new MergeIntoSingleFilePlugin({
+            'index.js': [
+                path.resolve(__dirname, 'src/Validation.js'),
+                path.resolve(__dirname, 'src/FormStore.js'),
+                path.resolve(__dirname, 'src/index.js')
+            ]
+        })
     ],
     context: __dirname,
     devtool: 'source-map',
     entry: path.join(__dirname, 'src/index.js'),
     output: {
         path: path.join(__dirname, 'dist'),
-        libraryTarget: 'commonjs2',
-        filename: 'index.js'
+        filename: '[name]'
     },
 
     module: {
@@ -50,6 +42,6 @@ module.exports = {
         ]
     },
     externals: {
-        mobx: 'mobx',
+        mobx: 'mobx'
     }
 };

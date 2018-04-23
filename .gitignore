@@ -4,5 +4,6 @@
 *.log.*
 *.class
 /node_modules/
+/docs/
 
 
