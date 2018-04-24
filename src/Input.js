@@ -7,7 +7,7 @@ import Validation from './Validation';
 /**
  * 오브젝트에서 지정한 키목록을 제거
  * @param {object} obj 변경하고자 하는 오브젝트
- * @param {Array<string>} keys 지우고자 하는 키 목록
+ * @param {...string} keys 지우고자 하는 키 목록
  * @return {object} 복제된 결과 오브젝트
  */
 const omit = (obj, ...keys) => {
@@ -34,7 +34,7 @@ class Input extends React.Component {
     }
 
     render() {
-        let {store, name, validOnBlur, onChange} = this.props;
+        let {store, name, validOnBlur, onChange, onBlur} = this.props;
         return (
             <FormControl inputRef={ref => store.refs.set(name, ref)}
                          value={store.valueMap.get(name)}
@@ -42,8 +42,13 @@ class Input extends React.Component {
                              store.valueMap.set(name, e.target.value || '');
                              onChange && onChange(e);
                          }}
-                         onBlur={validOnBlur ? () => store.hasTried.set(name, true) : undefined}
-                         {...omit(this.props, 'store', 'value', 'validations', 'validOnBlur', 'onChange')}
+                         onBlur={e => {
+                             if(validOnBlur)
+                                 store.hasTried.set(name, true);
+
+                             onBlur && onBlur(e);
+                         }}
+                         {...omit(this.props, 'store', 'value', 'validations', 'validOnBlur', 'onChange', 'onBlur')}
             />
         );
     }
@@ -52,6 +57,9 @@ class Input extends React.Component {
 Input.propTypes = {
     store: PropTypes.object.isRequired,
     name: PropTypes.string.isRequired,
+    onChange: PropTypes.func,
+    onBlur: PropTypes.func,
+    validOnBlur: PropTypes.bool,
     value: PropTypes.any,
     validations: PropTypes.arrayOf(PropTypes.instanceOf(Validation))
 };
