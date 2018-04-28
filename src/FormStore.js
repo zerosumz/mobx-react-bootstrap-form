@@ -42,7 +42,41 @@ class FormStore {
     @action.bound
     clear() {
         this.hasTried.clear();
-        this.valueMap.clear();
+        this.valueMap.forEach((v,k) => this.valueMap.set(k, ''));
+    }
+
+    /**
+     * 모든 인풋 필드를 시도한 것으로 표시한다.
+     */
+    @action.bound
+    tryAll(){
+        let store = this;
+        store.valueMap.forEach((v,k) => store.hasTried.set(k, true));
+    }
+
+    /**
+     * 모든 인풋 필드를 시도한 것으로 표시한다.
+     */
+    @action.bound
+    tryFirst(){
+        let store = this;
+        store.hasTried.set(store.firstInvalidInputName, true);
+    }
+
+    /**
+     * 유효성 체크를 실행한다. 유효하지 않은 인풋 요소들의 메시지 상태를 변경하고 포커스한다.
+     * @param first - 첫번째 유효하지 않은 요소에만 에러메시지 상태를 변경한다.
+     * @return {boolean} - 유효한지?
+     */
+    @action.bound
+    doCheckValid(first){
+        if(first) {
+            this.tryFirst()
+        } else {
+            this.tryAll();
+        }
+        this.firstInvalidRef.focus();
+        return this.valid;
     }
 
 
@@ -61,6 +95,19 @@ class FormStore {
         });
 
         return m;
+    }
+
+    /**
+     * 유효성 체크를 통과하지 못한 첫번째 인풋 요소의 이름.
+     * @return {*}
+     */
+    @computed
+    get firstInvalidInputName(){
+        let firstInput = [...this.invalidationsMap.entries()][0];
+        if (firstInput && firstInput.length > 1) {
+            return firstInput[0];
+        }
+        return undefined;
     }
 
     /**
