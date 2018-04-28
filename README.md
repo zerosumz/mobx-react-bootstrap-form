@@ -56,7 +56,100 @@ yarn add zerosumz/mobx-react-bootstrap-form
 
 ```
 
+# Class
 
+## `FormStore`
+
+폼 내의 각 인풋 필드의 값을 저장할 수 있는 스토어.
+
+### `valueMap: Map<String,*>`
+
+동기화 된 인풋 필드의 값.(observable)
+
+### `hasTried: Map<String,boolean>`
+
+상호작용에 의해 입력이 시도 되었는지의 상태 (observable)
+
+### `validationMap: Map<String,Validation>`
+
+유효성체크 Validation 의 모음
+
+### `refs: Map<String,HtmlElement>`
+
+폼내의 인풋 필드의 모음 (observable) observable
+
+### `clear()`
+
+입력시도 상태 및 값을 초기화한다.
+
+| Name | Type | Attribute | Description |
+| --- | --- | --- | --- |
+
+### `tryAll()`
+
+모든 인풋 필드를 시도한 것으로 표시한다.
+
+| Name | Type | Attribute | Description |
+| --- | --- | --- | --- |
+
+### `tryFirst()`
+
+모든 인풋 필드를 시도한 것으로 표시한다.
+
+| Name | Type | Attribute | Description |
+| --- | --- | --- | --- |
+
+### `doCheckValid(first: *): boolean`
+
+유효성 체크를 실행한다. 유효하지 않은 인풋 요소들의 메시지 상태를 변경하고 포커스한다.
+
+| Name | Type | Attribute | Description |
+| --- | --- | --- | --- |
+| first | * |  | 첫번째 유효하지 않은 요소에만 에러메시지 상태를 변경한다. |
+
+### `getErrorMessages(name: string): Array<string>`
+
+인풋필드를 찾아서 유효하지 않을경우 에러 메시지를 얻는다
+
+| Name | Type | Attribute | Description |
+| --- | --- | --- | --- |
+| name | string |  | 인풋필드의 이름 |
+
+## `Input`
+
+mobx 폼 스토어와 동기화 되는 인풋 필드.
+
+## `Validation`
+
+유효성체크 클래스
+
+### `constructor(rule: RegExp|Function, message: string)`
+
+새 유효성체크 클래스를 만든다.
+
+### `EMAIL_REGEX: RegExp`
+
+이메일 정규식
+
+### `REQUIRED_REGEX: RegExp`
+
+값있음 정규식
+
+### `rule: RegExp|Function`
+
+유효성 체크 룰.
+
+### `message: string`
+
+테스트 실패시 메세지
+
+### `isValid(value: string): boolean`
+
+값이 유효한가?
+
+| Name | Type | Attribute | Description |
+| --- | --- | --- | --- |
+| value | string |  | 테스트할 값 |
 
 
  

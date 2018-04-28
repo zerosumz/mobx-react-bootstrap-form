@@ -23,20 +23,22 @@ class Validation {
      * @param {string} message - 테스트 실패시 메시지
      */
     constructor(rule, message) {
+
+        /**
+         * 유효성 체크 룰.
+         * @type {RegExp|Function}
+         */
         this.rule = rule;
+
+        /**
+         * 테스트 실패시 메세지
+         * @type {string}
+         */
         this.message = message;
     }
 
-    /**
-     * 유효성 체크 룰.
-     * @type {RegExp|Function}
-     */
-    rule = null;
 
-    /**
-     * 테스트 실패시 메세지
-     * @type {string}
-     */
+    rule = null;
     message = null;
 
     /**

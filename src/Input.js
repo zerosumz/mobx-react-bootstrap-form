@@ -19,7 +19,7 @@ const omit = (obj, ...keys) => {
 /**
  * mobx 폼 스토어와 동기화 되는 인풋 필드.
  *
- * @reactProps {object} store - mobx 스토어
+ * @reactProps {FormStore} store - mobx 스토어
  * @reactProps {string} name  - 필드 이름
  * @reactProps {*} value  - 필드 값
  * @reactProps {Array<Validation>} validations  - 유효성 체크목록
