@@ -11,6 +11,7 @@
     "mobx-react": "^>=5.0.0",
     "prop-types": "^>=15.6.0",
     "react": "^>=16.0.0",
+    "react-dom": "^=16.0.0",
     "react-bootstrap": "^>=0.32.0"
   },
   "scripts": {
@@ -20,14 +21,16 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
+
+  },
+  "devDependencies": {
     "mobx": "^4.2.0",
     "mobx-react": "^5.0.0",
     "prop-types": "^15.6.1",
     "react": "^16.3.2",
     "react-bootstrap": "^0.32.1",
-    "react-dom": "^16.3.2"
-  },
-  "devDependencies": {
+    "react-dom": "^16.3.2",
+
     "@storybook/addon-actions": "^3.4.2",
     "@storybook/addon-links": "^3.4.2",
     "@storybook/addon-storysource": "^3.4.2",
