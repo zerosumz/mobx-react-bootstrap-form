@@ -1,6 +1,6 @@
 {
   "name": "mobx-react-bootstrap-form",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "mobx form store with react-bootstrap and supports validation",
   "main": "dist/index.js",
   "repository": "https://github.com/zerosumz/mobx-react-bootstrap-form",
